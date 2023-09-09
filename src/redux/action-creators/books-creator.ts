@@ -8,10 +8,11 @@ interface IfetchBooks {
     search: string
 }
 
-export const fetchBooks = (search: string, pagination: number, count: number, sorting: string, filter: string) => {
+export const fetchBooks = (search: string, pagination: number, count: number, sorting: string, filter: string, e?: any) => {
     return async (dispatch: Dispatch<BooksAction>) => {
         try {
             dispatch({ type: BooksActionTypes.FETCH_BOOKS });
+            console.log(e)
             const response = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=${search}&key=${process.env.REACT_APP_API_KEY}&startIndex=${count}${sorting ? `&orderBy=${sorting}` : ''}&maxResults=${pagination}${filter ? `&filter=${filter}` : ''}`
             )

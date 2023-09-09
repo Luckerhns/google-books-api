@@ -24,18 +24,22 @@ const BooksComponent = ({ input, currentBooks, setCurrentBooks, sorting, filter 
     }, [newBooks])
     
     const getBooks = async () => {
-        await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${input}${sorting ? `&orderBy=${sorting}` : ''}&key=${
-                process.env.REACT_APP_API_KEY
-            }&startIndex=${pagination * currentPage}&maxResults=${pagination}${filter ? `&filter=${filter}` : ''}`
-            ).then(res => {
-                setNewBooks(res.data.items)
-                // pagination += 30
-                setCurrentPage(prev => prev + 1)
-            })
-            // page += 1
-            console.log(currentPage * pagination)
-        console.log(input);
+        try {
+            
+            await axios.get(
+                `https://www.googleapis.com/books/v1/volumes?q=${input}${sorting ? `&orderBy=${sorting}` : ''}&key=${
+                    process.env.REACT_APP_API_KEY
+                }&startIndex=${pagination * currentPage}&maxResults=${pagination}${filter ? `&filter=${filter}` : ''}`
+                ).then(res => {
+                    setNewBooks(res.data.items)
+                    // pagination += 30
+                    setCurrentPage(prev => prev + 1)
+                })
+                // page += 1
+            } catch (error) {
+                console.log(error)
+                return 'Error in fetching data'
+            }
     };
 
     console.log(books);
