@@ -1,0 +1,19 @@
+.book__container {
+    width: 250px;
+    height: fit-content;
+    margin: 2vw 2vw;
+    padding: 2vw 2vw;
+    background: rgb(218, 218, 218);
+    cursor: pointer;
+    border-radius: 10px;
+
+    > * {
+        display: flex; 
+        justify-content: center;    
+        align-items: center;
+    }
+
+    img {
+        margin: auto;
+    }
+}
